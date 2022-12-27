@@ -1,5 +1,4 @@
 from setuptools import find_packages,setup
-
 from typing import List
 
 REQUIREMENT_FILE_NAME="requirements.txt"
@@ -20,8 +19,9 @@ def get_requirements()->List[str]:
 setup(
     name="insurance",
     version="0.0.1",
-    author="shobhan",
+    author="shobhandeb",
     author_email="devshobhan4@gmail.com",
     packages = find_packages(),
     install_requires=get_requirements(),
 )
+
