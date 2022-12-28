@@ -83,7 +83,7 @@ class DataTransformation:
             #target encoder
             train_arr = np.c_[input_feature_train_arr, target_feature_train_arr ]
             test_arr = np.c_[input_feature_test_arr, target_feature_test_arr]
-
+    
 
             #save numpy array
             utils.save_numpy_array_data(file_path=self.data_transformation_config.transformed_train_path,

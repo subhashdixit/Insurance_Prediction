@@ -33,7 +33,7 @@ class ModelTrainer:
 
     def train_model(self,x,y):
         try:
-            det_reg =  XGBClassifier()
+            det_reg =  DecisionTreeRegressor()
             det_reg.fit(x,y)
             return det_reg
         except Exception as e:
