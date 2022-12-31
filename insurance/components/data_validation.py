@@ -25,7 +25,7 @@ class DataValidation:
             self.validation_error=dict()
         except Exception as e:
             raise InsuranceException(e, sys)
-
+        
     
 
     def drop_missing_values_columns(self,df:pd.DataFrame,report_key_name:str)->Optional[pd.DataFrame]:
@@ -55,7 +55,7 @@ class DataValidation:
             return df
         except Exception as e:
             raise InsuranceException(e, sys)
-
+    #     print("dsgfg")
     def is_required_columns_exists(self,base_df:pd.DataFrame,current_df:pd.DataFrame,report_key_name:str)->bool:
         try:
            
@@ -67,7 +67,7 @@ class DataValidation:
                 if base_column not in current_columns:
                     logging.info(f"Column: [{base} is not available.]")
                     missing_columns.append(base_column)
-
+            
             if len(missing_columns)>0:
                 self.validation_error[report_key_name]=missing_columns
                 return False
@@ -143,7 +143,7 @@ class DataValidation:
             if test_df_columns_status:
                 logging.info(f"As all column are available in test df hence detecting data drift")
                 self.data_drift(base_df=base_df, current_df=test_df,report_key_name="data_drift_within_test_dataset")
-
+          
             #write the report
             logging.info("Write reprt in yaml file")
             utils.write_yaml_file(file_path=self.data_validation_config.report_file_path,

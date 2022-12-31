@@ -7,7 +7,7 @@ client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
 
 DATABASE_NAME = "insurance"
 COLLECTION_NAME = "premium"
-DATA_FILE_PATH = "/config/workspace/insurance.csv"
+DATA_FILE_PATH = "/config/workspace/insurance_main_dataset.csv"
 
 if __name__=="__main__":
     df = pd.read_csv(DATA_FILE_PATH)
