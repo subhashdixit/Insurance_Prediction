@@ -3,7 +3,7 @@ from insurance.exception import InsuranceException
 from insurance.logger import logging
 from typing import Optional
 import os,sys 
-from sklearn.tree import DecisionTreeRegressor
+import xgboost as xg
 from insurance import utils
 from sklearn.metrics import r2_score
 
@@ -33,9 +33,9 @@ class ModelTrainer:
 
     def train_model(self,x,y):
         try:
-            det_reg =  DecisionTreeRegressor()
-            det_reg.fit(x,y)
-            return det_reg
+            xgb_r = xg.XGBRegressor()
+            xgb_r.fit(x,y)
+            return xgb_r
         except Exception as e:
             raise InsuranceException(e, sys)
 
