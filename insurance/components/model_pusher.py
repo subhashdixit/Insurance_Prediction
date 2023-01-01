@@ -5,6 +5,7 @@ import os,sys
 from insurance.utils import load_object,save_object
 from insurance.logger import logging
 from insurance.entity.artifact_entity import DataTransformationArtifact,ModelTrainerArtifact,ModelPusherArtifact
+
 class ModelPusher:
 
     def __init__(self,model_pusher_config:ModelPusherConfig,

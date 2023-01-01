@@ -3,10 +3,11 @@ from insurance.entity import config_entity,artifact_entity
 from insurance.exception import InsuranceException
 from insurance.logger import logging
 from insurance.utils import load_object
-from sklearn.metrics import f1_score
+from sklearn.metrics import r2_score
 import pandas  as pd
 import sys,os
 from insurance.config import TARGET_COLUMN
+
 class ModelEvaluation:
 
     def __init__(self,
@@ -65,28 +66,32 @@ class ModelEvaluation:
 
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
             target_df = test_df[TARGET_COLUMN]
-            y_true =target_encoder.transform(target_df)
+            y_true = target_df
+            # target_encoder.transform(target_df)
             # accuracy using previous trained model
             
             input_feature_name = list(transformer.feature_names_in_)
             input_arr =transformer.transform(test_df[input_feature_name])
             y_pred = model.predict(input_arr)
             print(f"Prediction using previous model: {target_encoder.inverse_transform(y_pred[:5])}")
-            previous_model_score = f1_score(y_true=y_true, y_pred=y_pred)
+            previous_model_score = r2_score(y_true=y_true, y_pred=y_pred)
             logging.info(f"Accuracy using previous trained model: {previous_model_score}")
            
             # accuracy using current trained model
             input_feature_name = list(current_transformer.feature_names_in_)
             input_arr =current_transformer.transform(test_df[input_feature_name])
             y_pred = current_model.predict(input_arr)
-            y_true =current_target_encoder.transform(target_df)
-            print(f"Prediction using trained model: {current_target_encoder.inverse_transform(y_pred[:5])}")
-            current_model_score = f1_score(y_true=y_true, y_pred=y_pred)
+            y_true = target_df
+            # current_target_encoder.transform(target_df)
+            # current_target_encoder.inverse_transform(y_pred[:5])
+            print(f"Prediction using trained model: {y_pred[:5]}")
+            current_model_score = r2_score(y_true=y_true, y_pred=y_pred)
             logging.info(f"Accuracy using current trained model: {current_model_score}")
             if current_model_score<=previous_model_score:
                 logging.info(f"Current trained model is not better than previous model")
                 raise Exception("Current trained model is not better than previous model")
 
+            
             model_eval_artifact = artifact_entity.ModelEvaluationArtifact(is_model_accepted=True,
             improved_accuracy=current_model_score-previous_model_score)
             logging.info(f"Model eval artifact: {model_eval_artifact}")
