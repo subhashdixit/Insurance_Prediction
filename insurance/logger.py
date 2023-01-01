@@ -6,7 +6,7 @@ import os
 #log file name
 LOG_FILE_NAME = f"{datetime.now().strftime('%m%d%Y__%H%M%S')}.log"
 
-#log directory
+#log directory comment
 LOG_FILE_DIR = os.path.join(os.getcwd(),"logs")
 
 #create folder if not available
