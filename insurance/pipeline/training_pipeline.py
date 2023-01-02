@@ -49,11 +49,9 @@ def start_training_pipeline():
 
         #model pusher
         model_pusher_config = config_entity.ModelPusherConfig(training_pipeline_config)
-        
         model_pusher = ModelPusher(model_pusher_config=model_pusher_config, 
                 data_transformation_artifact=data_transformation_artifact,
                 model_trainer_artifact=model_trainer_artifact)
-
         model_pusher_artifact = model_pusher.initiate_model_pusher()
     except Exception as e:
         raise InsuranceException(e, sys)

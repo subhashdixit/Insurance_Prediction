@@ -70,10 +70,15 @@ class ModelEvaluation:
             # target_encoder.transform(target_df)
             # accuracy using previous trained model
             
+            """We need to create label encoder object for each categorical variable. We will check later"""
             input_feature_name = list(transformer.feature_names_in_)
+            for i in input_feature_name:       
+                if test_df[i].dtypes =='object':
+                    test_df[i] =target_encoder.fit_transform(test_df[i])  
+
             input_arr =transformer.transform(test_df[input_feature_name])
             y_pred = model.predict(input_arr)
-            print(f"Prediction using previous model: {target_encoder.inverse_transform(y_pred[:5])}")
+            print(f"Prediction using previous model: {y_pred[:5]}")
             previous_model_score = r2_score(y_true=y_true, y_pred=y_pred)
             logging.info(f"Accuracy using previous trained model: {previous_model_score}")
            
