@@ -1,9 +1,9 @@
 import pymongo
 import pandas as pd
 import json
-
+from insurance.config import mongo_client
 # Provide the mongodb localhost url to connect python to mongodb.
-client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
+# client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
 
 DATABASE_NAME = "insurance"
 COLLECTION_NAME = "premium"
@@ -19,5 +19,6 @@ if __name__=="__main__":
     print(json_record[0])
 
     #insert converted json to mongo db  
-    client[DATABASE_NAME][COLLECTION_NAME].insert_many(json_record)
+    # client[DATABASE_NAME][COLLECTION_NAME].insert_many(json_record)
+    mongo_client[DATABASE_NAME][COLLECTION_NAME].insert_many(json_record)
 
