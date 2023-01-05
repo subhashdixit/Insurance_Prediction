@@ -27,7 +27,7 @@ with DAG(
         os.system(f"aws s3 sync s3://{bucket_name}/input_files /app/input_files")
 
     def batch_prediction(**kwargs):
-        from sensor.pipeline.batch_prediction import start_batch_prediction
+        from insurance.pipeline.batch_prediction import start_batch_prediction
         input_dir = "/app/input_files"
         for file_name in os.listdir(input_dir):
             #make prediction
