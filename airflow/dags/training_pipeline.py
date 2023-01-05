@@ -8,10 +8,10 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'sensor_training',
+    'insurance_training',
     default_args={'retries': 2},
     # [END default_args]
-    description='Sensor Fault Detection',
+    description='Insurance Prediction',
     schedule_interval="@weekly",
     start_date=pendulum.datetime(2022, 12, 11, tz="UTC"),
     catchup=False,
