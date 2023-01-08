@@ -18,4 +18,9 @@ PyYAML
 numpy
 scikit-learn
 apache-airflow
+streamlit
+matplotlib
+seaborn
+scipy
+scikit-learn
 -e .
