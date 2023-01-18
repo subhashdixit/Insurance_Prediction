@@ -72,3 +72,7 @@ sudo usermod -aG docker ubuntu
 newgrp docker
 ```
 
+Deleted ECR because of charges
+```
+Successfully deleted repository insurance_prediction
+```
